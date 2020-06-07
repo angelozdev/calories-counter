@@ -1,0 +1,22 @@
+{
+  "name": "funcional-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server",
+    "build": "postcss ./src/styles/tailwind.css -o ./src/styles/main.css"
+  },
+  "keywords": [],
+  "author": "Angelo Zambrano <angelozam17@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "tailwindcss": "^1.4.6"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.0",
+    "live-server": "^1.2.1",
+    "postcss": "^7.0.32",
+    "postcss-cli": "^7.1.1"
+  }
+}

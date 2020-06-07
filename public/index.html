@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="../src/styles/main.css">
+   <title>Calories Counter</title>
+</head>
+<body>
+   <div class="container mx-auto p-4 shadow-lg mt-4 border border-gray-200">
+      <h1 class="text-4xl font-semibold text-center">Contador de calorías</h1>
+
+      <table class="table-auto mx-auto w-full">
+
+         <thead>
+            <tr>
+               <th class="border px-4 py-2">Descripción</th>
+               <th class="border px-4 py-2">Calorías</th>
+               <th class="border px-4 py-2">Carbohidratos</th>
+               <th class="border px-4 py-2">Proteína</th>
+            </tr>
+         </thead>
+
+         <tbody>
+            <!-- <tr>
+               <td class="border px-4 py-2">Total</td>
+               <td class="border px-4 py-2">0</td>
+               <td class="border px-4 py-2">0</td>
+               <td class="border px-4 py-2">0</td>
+            </tr> -->
+         </tbody>
+
+         <tfoot>
+            <tr class="bg-gray-200">
+               <td class="border px-4 py-2">Total</td>
+               <td class="border px-4 py-2">0</td>
+               <td class="border px-4 py-2">0</td>
+               <td class="border px-4 py-2">0</td>
+            </tr>
+         </tfoot>
+      </table>
+
+      <div class="mt-4 w-full mx-auto">
+         <input class="focus:border-indigo-300 outline-none w-1/5 border py-1 px-2" type="text" placeholder="Descripción" id="description"/>
+         <input class="focus:border-indigo-300 outline-none w-1/5 border py-1 px-2" min="0" type="number" placeholder="Calorías"id="calories" />
+         <input class="focus:border-indigo-300 outline-none w-1/5 border py-1 px-2" min="0" type="number" placeholder="Carbohidratos" id="carbs" />
+         <input class="focus:border-indigo-300 outline-none w-1/5 border py-1 px-2" min="0" type="number" placeholder="Proteínas" id="proteins" />
+         <input class="focus:bg-indigo-300 hover:bg-indigo-500 outline-none cursor-pointer rounded-md text-lg text-white border bg-indigo-400 py-1 px-3" type="button" value="+" id="btn" />
+      </div>
+   </div>
+
+   <script src="../src/index.js"></script>
+</body>
+</html>
