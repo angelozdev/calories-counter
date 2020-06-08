@@ -1,12 +1,10 @@
 # Calories Counter 
 
-![]()
+![](https://raw.githubusercontent.com/Angelozam17/calories-counter/master/src/assets/static-view.png)
 
 Project: [Functional Programming](https://platzi.com/clases/funcional-js/)
 
 ## Installation
-
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 
 ```bash
 git clone https://github.com/Angelozam17/calories-counter.git
