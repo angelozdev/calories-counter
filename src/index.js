@@ -5,7 +5,7 @@ const $btn = document.querySelector('#btn');
 const $description = document.querySelector('#description');
 const $carbs = document.querySelector('#carbs');
 const $calories = document.querySelector('#calories');
-const $proteins = document.querySelector('#proteins');
+const $protein = document.querySelector('#protein');
 
 
 const list = []
@@ -62,11 +62,11 @@ const validateInputs = () => {
    ? $calories.classList.remove('border-red-500')
    : $calories.classList.add('border-red-500')
 
-   $proteins.value 
-   ? $proteins.classList.remove('border-red-500')
-   : $proteins.classList.add('border-red-500')
+   $protein.value 
+   ? $protein.classList.remove('border-red-500')
+   : $protein.classList.add('border-red-500')
 
-   if($description.value && $carbs.value && $calories.value && $proteins.value){
+   if($description.value && $carbs.value && $calories.value && $protein.value){
       addObject()
    }
 }
@@ -77,19 +77,36 @@ const addObject = () => {
       description: $description.value,
       calories: Number($calories.value),
       carbs: Number($carbs.value),
-      proteins: Number($proteins.value)
+      protein: Number($protein.value)
    }
 
    list.push(newItem)
-   $items.innerHTML += tableRow(Object.values(newItem))
-   cleanInputs()
-   console.log(tableRow(Object.values(newItem)));
+   console.log(list);
+   updateTotals();
+   cleanInputs();
+}
+
+const updateTotals = () => {
+   const $totalCalories = document.querySelector('#totalCalories'),
+         $totalCarbs = document.querySelector('#totalCarbs'),
+         $totalProtein = document.querySelector('#totalProtein');
+
+   let calories = 0, protein = 0, carbs = 0;
+   list.map(item => {
+      calories += item.calories;
+      protein += item.protein;
+      carbs += item.carbs;
+   })
+   
+   $totalCalories.innerHTML = calories;
+   $totalCarbs.innerHTML = carbs;
+   $totalProtein.innerHTML = protein;
 }
 
 const cleanInputs = () => {
    $description.value = '';
    $carbs.value = '';
-   $proteins.value = '';
+   $protein.value = '';
    $calories.value = '';
 }
 
@@ -99,5 +116,5 @@ $btn.addEventListener('click' , validateInputs)
 $description.addEventListener('change', () => validateInput($description))
 $carbs.addEventListener('change', () => validateInput($carbs))
 $calories.addEventListener('change', () => validateInput($calories))
-$proteins.addEventListener('change', () => validateInput($proteins))
+$protein.addEventListener('change', () => validateInput($protein))
 
