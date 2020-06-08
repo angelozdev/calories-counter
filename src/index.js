@@ -6,13 +6,14 @@ const $description = document.querySelector('#description');
 const $carbs = document.querySelector('#carbs');
 const $calories = document.querySelector('#calories');
 const $protein = document.querySelector('#protein');
+const $items = document.querySelector('#items');
 
 window.addEventListener('load', () => {
    renderItems();
    updateTotals();
 })
 
-const list = [
+let list = [
    {
       description: 'Apple',
       calories: 40,
@@ -27,30 +28,26 @@ const list = [
    }
 ]
 
-const attrsToString = (attrs) => {
-   const keys = Object.keys(attrs);
-   const attributes = [];
-
-   keys.forEach(attr => {
-      attributes.push(`${attr}="${attrs[attr]}"`)
-   });
-
-   const string = attributes.join(' ')
-   return string;
-} 
+const attrsToString = (attrs) => (
+   Object.keys(attrs)
+      .map(attr => `${attr}="${attrs[attr]}"`)
+      .join((' '))
+)
 
 const tagAttrs = (obj = {}) => (content = '') => (
-   `<${obj.tag}${obj.attrs ? ' ' : ''}${obj.attrs ? attrsToString(obj.attrs) : ''}>${content}</${obj.tag}>`
+   `<${obj.tag}${obj.attrs 
+   ? ' ' 
+   : ''}${obj.attrs 
+   ? attrsToString(obj.attrs) 
+   : ''}>${content}</${obj.tag}>`
 )
 
 
-const tag = (t) => {
-   if(typeof t === 'string'){
-      return tagAttrs({tag: t})
-   }else{
-      return tagAttrs(t)
-   }
-}
+const tag = (t) => (
+   typeof t === 'string' 
+   ? tagAttrs({tag: t}) 
+   : tagAttrs(t)
+)
 
 const tableRowTag = tag('tr');
 const tableRow = (items) => tableRowTag(tableCells(items))
@@ -88,15 +85,27 @@ const validateInputs = () => {
    }
 }
 
-const renderItems = () => {
-   const $items = document.querySelector('#items')
-   $items.innerHTML = '';
-   
-   const rows = list.map(item => {
-      const { description, carbs, protein, calories } = item;
-      return tableRow([description, calories, carbs, protein])
-   }).join('')
+const removeItem = (e) => {
+   const { target } = e;
+   const name =target.parentNode.parentNode.firstChild.innerText;
+   /* ¿Cómo volver esto inmutable? */
+   if(target.classList.contains('btnRemove')){
+      list = list.filter(item => (
+         item.description !== name
+      ))
+      renderItems();
+      updateTotals()
+   }
+}
 
+const renderItems = () => {
+   $items.innerHTML = '';
+
+   const rows = list.map((item, i) => {
+      const tableBtn = tag({tag: 'button', attrs: {class: 'btnRemove px-2 bg-red-500 text-white'}})('-')
+      const { description, carbs, protein, calories } = item;
+      return tableRow([description, calories, carbs, protein, tableBtn])
+   }).join('')
    $items.innerHTML = rows;
 }
 
@@ -146,4 +155,5 @@ $description.addEventListener('change', () => validateInput($description))
 $carbs.addEventListener('change', () => validateInput($carbs))
 $calories.addEventListener('change', () => validateInput($calories))
 $protein.addEventListener('change', () => validateInput($protein))
+$items.addEventListener('click', (e) => removeItem(e))
 
