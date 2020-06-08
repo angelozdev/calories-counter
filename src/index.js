@@ -7,8 +7,25 @@ const $carbs = document.querySelector('#carbs');
 const $calories = document.querySelector('#calories');
 const $protein = document.querySelector('#protein');
 
+window.addEventListener('load', () => {
+   renderItems();
+   updateTotals();
+})
 
-const list = []
+const list = [
+   {
+      description: 'Apple',
+      calories: 40,
+      carbs: 50,
+      protein: 10
+   },
+   {
+      description: 'Chicken',
+      calories: 100,
+      carbs: 50,
+      protein: 200
+   }
+]
 
 const attrsToString = (attrs) => {
    const keys = Object.keys(attrs);
@@ -71,8 +88,19 @@ const validateInputs = () => {
    }
 }
 
-const addObject = () => {
+const renderItems = () => {
    const $items = document.querySelector('#items')
+   $items.innerHTML = '';
+   
+   const rows = list.map(item => {
+      const { description, carbs, protein, calories } = item;
+      return tableRow([description, calories, carbs, protein])
+   }).join('')
+
+   $items.innerHTML = rows;
+}
+
+const addObject = () => {
    const newItem = {
       description: $description.value,
       calories: Number($calories.value),
@@ -82,6 +110,7 @@ const addObject = () => {
 
    list.push(newItem)
    console.log(list);
+   renderItems();
    updateTotals();
    cleanInputs();
 }
